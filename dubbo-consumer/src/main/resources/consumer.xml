@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="consumer" owner="xianglin"/>
+
+    <!-- 监控中心 -->
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- 注册中心，N/A 表示直连，不通过注册中心 -->
+    <!--    <dubbo:registry address="N/A"/>-->
+    <!--    <dubbo:reference id="helloService" interface="store.xianglin.dubbo.api.service.HelloService"-->
+    <!--                     url="dubbo://10.212.162.96:20880/store.xianglin.dubbo.api.service.HelloService"/>-->
+
+    <!-- 使用 zookeeper 单机作为服务注册发现中心 -->
+    <dubbo:registry address="zookeeper://localhost:2181" check="false"/>
+    <dubbo:reference id="helloService" interface="store.xianglin.dubbo.api.service.HelloService"/>
+</beans>
